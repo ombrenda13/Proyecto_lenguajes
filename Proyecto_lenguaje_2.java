@@ -1,4 +1,5 @@
 
+
 package proyecto_lenguaje_2;
 import java.util.*;
 import java.io.*;
@@ -215,7 +216,8 @@ public class Proyecto_lenguaje_2 {
                    
                    String cadena=sin_puntos_muertos.get(a).toString();
                         String[] Array1=cadena.split(":");
-                        String cadena2=Array1[0]; 
+                        String cadena2=Array1[0];
+                        
                    for(int b=1;b<sin_puntos_muertos.size();b++){
                        if(sin_puntos_muertos.get(b).toString().contains(cadena2)){ // analiza si el simbolo inicial se encuentra en otra produccion
                           //System.out.println("estoy en la cadena:"+sin_puntos_muertos.get(b));
@@ -236,11 +238,24 @@ public class Proyecto_lenguaje_2 {
                  }
            } 
            
+        //cambiar codigo   
            for(int b=0;b<Cadena_vacia.size();b++){
+             
+      
+              // System.out.println("prueba1:"+Cadena_vacia.get(b));
                
+               for(int c=0;c<sin_puntos_muertos.size();c++){ 
+                   String cadena=sin_puntos_muertos.get(c).toString();
+                    String[] Array1=cadena.split(":");
+                    String cadena3=Array1[1]; 
+                    //System.out.println("prueba2:"+sin_puntos_muertos.get(c));
+               if(cadena3.contains(Cadena_vacia.get(b).toString())){
+                   
+                    System.out.println("PRUEBA------------"+sin_puntos_muertos.get(c));
+               }
                 
            }
-           
+           }
            
     } 
       
@@ -292,7 +307,7 @@ public static void Combinaciones(ArrayList sin_puntos_muertos,String Cadena_vaci
        for(int a=0;a<sin_puntos_muertos.size();a++){
            
            if(sin_puntos_muertos.get(a).toString().contains(Cadena_vacia)){
-           
+                
            }
            
        }
@@ -306,5 +321,10 @@ public static void Combinaciones(ArrayList sin_puntos_muertos,String Cadena_vaci
 
 }
 
+
+        
+   
+        
+    
     
 
