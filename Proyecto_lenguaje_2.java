@@ -15,8 +15,6 @@ public class Proyecto_lenguaje_2 {
        ArrayList no_terminales= new ArrayList();
         ArrayList terminales = new ArrayList();
         ArrayList no_terminales_original=new ArrayList();
-       
-       
       try {
              Lector("/home/brenda/Escritorio/apuntes SO/proyecto_lenguaje_2/reglas.txt",producciones,no_terminales,terminales);
         } catch (IOException ex) {
@@ -45,6 +43,8 @@ public class Proyecto_lenguaje_2 {
         Eliminar_muertos(producciones,no_terminales,terminales,sin_puntos_muertos,reglas_originales);
       
         System.out.println("SIN PUNTOS MUERTOS:"+sin_puntos_muertos);
+        
+        Eliminar_inaccesibles(sin_puntos_muertos,reglas_originales);
         
     }
     
@@ -147,14 +147,156 @@ public class Proyecto_lenguaje_2 {
         }       
     }
 
-
+    public static void Eliminar_inaccesibles(ArrayList sin_puntos_muertos,ArrayList reglas_originales){
+     int aux;
+         int aux2=0; 
+         String aux_char = null;
+         
+            ArrayList auxiliar=new ArrayList();
+        for(int a=0; a<reglas_originales.size();a++){
+            String cadena=sin_puntos_muertos.get(a).toString();
+            String[] Array1=cadena.split(":");
+            String cadena3=Array1[1]; 
+            auxiliar.add(cadena3);  
+        }  
+        
+         for(int a=0; a<reglas_originales.size();a++){
+          aux=0;
+          for(int b=0; b<auxiliar.size(); b++){
+                   if(auxiliar.get(b).toString().contains(reglas_originales.get(a).toString())){
+                     aux_char=reglas_originales.get(a).toString();
+                    
+                     aux=aux+1;  
+                        
+                     if(aux==1 && a==b){
+                         if(a!=0){ //evita que se elimine el simbolo inicial 
+                        System.out.println("INACCESIBLE:"+reglas_originales.get(a)); 
+                        aux_char=reglas_originales.get(a).toString();
+                         
+                        for(int c=0; c<sin_puntos_muertos.size();c++){
+                            if(aux_char.toString().charAt(0)==sin_puntos_muertos.get(c).toString().charAt(0)){
+                                  sin_puntos_muertos.remove(sin_puntos_muertos.get(c));
+                            }  }
+                         }
+                        
+                     }  
+                                        }    
+                                               }
+                    if(aux==0){
+                        aux_char=reglas_originales.get(a).toString();
+                     //   System.out.println("INACCESIBLE:"+reglas_originales.get(a));
+                        for(int c=0; c<sin_puntos_muertos.size();c++){
+                          
+                            if(aux_char.toString().charAt(0)==sin_puntos_muertos.get(c).toString().charAt(0)){
+                                        if(c!=0){
+                                    sin_puntos_muertos.remove(sin_puntos_muertos.get(c));}
+                            }
+                        }
+                              }  
+                                                      }
+         
+      System.out.println("REGLAS_SIN_INACCESIBLES:"+sin_puntos_muertos);
+         Eliminacion_cadenas_vacias(sin_puntos_muertos);
+    }
     
+    public static void Eliminacion_cadenas_vacias(ArrayList sin_puntos_muertos ){ 
+        String Nueva_produccion=new String();
+        ArrayList Cadena_vacia=new ArrayList();
+        Set<String> Cadena_sin_repeticiones = new HashSet<>();
+        int bandera=0;
+        char caracter;
+        String nuevas_cadenas_vacias=new String();
+        for(int a=0;a<sin_puntos_muertos.size();a++){
+           if(a==0){
+               
+               if(sin_puntos_muertos.get(a).toString().contains("@")){
+                  // System.out.println("lo contiene:"+sin_puntos_muertos.get(a));
+                   
+                   
+                   String cadena=sin_puntos_muertos.get(a).toString();
+                        String[] Array1=cadena.split(":");
+                        String cadena2=Array1[0]; 
+                   for(int b=1;b<sin_puntos_muertos.size();b++){
+                       if(sin_puntos_muertos.get(b).toString().contains(cadena2)){ // analiza si el simbolo inicial se encuentra en otra produccion
+                          //System.out.println("estoy en la cadena:"+sin_puntos_muertos.get(b));
+                       Nueva_produccion=(cadena2+"'"+":"+cadena2+"/"+"@");
+                           bandera=1;
+                       }
+                   }
+               }
+               if(bandera==1){
+             sin_puntos_muertos.add(0,Nueva_produccion);
+               }
+        }
+           else{
+                 if(sin_puntos_muertos.get(a).toString().contains("@")){
+                  Cadena_vacia.add(sin_puntos_muertos.get(a).toString().charAt(0));
+                    
+                     
+                 }
+           } 
+           
+           for(int b=0;b<Cadena_vacia.size();b++){
+               
+                
+           }
+           
+           
+    } 
+      
+         System.out.println("cadena_vacia:"+Cadena_vacia);
+        
+        
+        
+        
+//        for(int b=0; b<Cadena_vacia.size();b++){
+//        for(int a=0; a<sin_puntos_muertos.size();a++){
+//                    if(sin_puntos_muertos.get(a).toString().contains(Cadena_vacia.get(b).toString())){
+//                        System.out.println("tambien produzco vacio:"+sin_puntos_muertos.get(a).toString().charAt(0));
+//                        String cadena=new String();
+//                        Cadena_vacia.add(sin_puntos_muertos.get(a).toString());
+//                 //     System.out.println("cadenaaa:"+Cadena_vacia);
+//                         
+//                    }
+//        }
+//      
+//        }
+       // System.out.println("nueva_cadena_vacia:"+Cadena_vacia);
+       Cadena_vacia.add(nuevas_cadenas_vacias);
+       
+        System.out.println("prueba hash---"+nuevas_cadenas_vacias);
+     //   Cadena_vacia.add(sin_puntos_muertos.get(a).toString().charAt(0));
+     Cadena_sin_repeticiones.add(nuevas_cadenas_vacias);
+     for(int a=0; a<nuevas_cadenas_vacias.length();a++){
+         
+     
+     }
+        System.out.println("cadena_sin...."+Cadena_sin_repeticiones);
+            Combinaciones(sin_puntos_muertos,nuevas_cadenas_vacias);
+        
+        
+        
+}
 
-
-
-
-
-
+public static void Combinaciones(ArrayList sin_puntos_muertos,String Cadena_vacia){
+        System.out.println("combinaciones:"+sin_puntos_muertos);
+        System.out.println("combinaciones:"+Cadena_vacia);
+       ArrayList auxiliar=new ArrayList();
+        for(int a=0; a<sin_puntos_muertos.size();a++){
+            String cadena=sin_puntos_muertos.get(a).toString();
+            String[] Array1=cadena.split(":");
+            String cadena3=Array1[1]; 
+            auxiliar.add(cadena3);  
+        }  
+        
+       for(int a=0;a<sin_puntos_muertos.size();a++){
+           
+           if(sin_puntos_muertos.get(a).toString().contains(Cadena_vacia)){
+           
+           }
+           
+       }
+}
 
 
 
@@ -163,9 +305,6 @@ public class Proyecto_lenguaje_2 {
 
 
 }
-        
-   
-        
-    
+
     
 
