@@ -1,5 +1,6 @@
 
 
+
 package proyecto_lenguaje_2;
 import java.util.*;
 import java.io.*;
@@ -75,14 +76,14 @@ public class Proyecto_lenguaje_2 {
        char caracter = (char) caracterLeido; 
    
            if(caracterLeido>=65 && caracterLeido<=90){
-               terminales.add(caracter);
+               no_terminales.add(caracter);
            }   
            if(caracterLeido>=97 && caracterLeido<=122){
-               no_terminales.add(caracter);
+              terminales.add(caracter);
                
            }
            if (caracterLeido==64){
-               no_terminales.add(caracter);
+               terminales.add(caracter);
            
            }
           caracterLeido = fr.read(); 
@@ -237,13 +238,10 @@ public class Proyecto_lenguaje_2 {
                      
                  }
            } 
-           
-        //cambiar codigo   
+            
+       
            for(int b=0;b<Cadena_vacia.size();b++){
              
-      
-              // System.out.println("prueba1:"+Cadena_vacia.get(b));
-               
                for(int c=0;c<sin_puntos_muertos.size();c++){ 
                    String cadena=sin_puntos_muertos.get(c).toString();
                     String[] Array1=cadena.split(":");
@@ -257,9 +255,9 @@ public class Proyecto_lenguaje_2 {
            }
            }
     } 
-         System.out.println("cadena_vacia:"+Cadena_sin_repeticiones);
-        
-      
+         
+        System.out.println("SIN PUNTOS MUERTOS:"+sin_puntos_muertos);
+      System.out.println("cadena_vacia:"+Cadena_sin_repeticiones);
      
             Combinaciones(sin_puntos_muertos,Cadena_sin_repeticiones);
         
@@ -268,34 +266,57 @@ public class Proyecto_lenguaje_2 {
 }
 
 public static void Combinaciones(ArrayList sin_puntos_muertos,Set Cadena_sin_repeticiones){
-
-       ArrayList auxiliar=new ArrayList();
-        for(int a=0; a<sin_puntos_muertos.size();a++){
-            String cadena=sin_puntos_muertos.get(a).toString();
-            String[] Array1=cadena.split(":");
-            String cadena3=Array1[1]; 
-            String cadena2=Array1[0];
-            
-        }  
-        
-       for(int a=0;a<sin_puntos_muertos.size();a++){
-            
-          
-       }
+       ArrayList auxiliar=new ArrayList();//pasar a Arraylist para hacer más facil el manejo de agreacion de producciones
+       ArrayList Cadena_vacios=new ArrayList(Cadena_sin_repeticiones);//pasa el has set a una lista 
+       Iterator<String> i = Cadena_sin_repeticiones.iterator(); //iterador que permite recorrer hash set
+       String cadena=new String();
+       String aux=new String();
+       String aux2=new String();//auxiliar que nos ayuda a guardar lo que reemplazaremos
+     for(int c=0;c<sin_puntos_muertos.size();c++){ String replace=new String();aux=sin_puntos_muertos.get(c).toString();//agrega a otra lista llamada aux las relgas
+                                       
+                                        cadena=sin_puntos_muertos.get(c).toString();
+                                        String[] Array1=cadena.split(":");
+                                        String cadena3=Array1[1]; 
+                                        String cadena2=Array1[0];
+                                        String[] Array2=cadena3.split("/");
+                                        String cadena4=new String(); 
+                                      cadena3=cadena3+replace;
+                                    for(int d=0; d<Cadena_vacios.size();d++){ 
+                                    
+                                       
+                                       for(int a=0; a<Array2.length;a++){
+                                           cadena4=Array2[a];
+                                            //auxiliar.add(sin_puntos_muertos.get(0));
+                                       if(cadena4.contains(Cadena_vacios.get(d).toString()) && c!=0){
+                                                System.out.println("CONTENGO VACIOS");
+                                                System.out.println("regla:"+cadena2);
+                                                System.out.println("produccion:"+cadena4);
+                                               // System.out.println("replace:"+(cadena4.replace(Cadena_vacios.get(d).toString(), "@")));//reemplaza todos los NT contenidos en la gramatica que generen cadena vacia @
+                                                
+                                                replace=cadena4.replace(Cadena_vacios.get(d).toString(), "@");
+                                                System.out.println("replace:"+replace);
+                                               cadena3=cadena3+replace+"/";
+                                               
+                                              // auxiliar.set(c,cadena3);
+                                            } 
+                                    }
+                                       
+                               
+                              
+                  }System.out.println("cadena3:"+cadena3);
+                  auxiliar.add(cadena2+":"+cadena3);
+                    System.out.println("auxiliar---"+auxiliar);
+                  
+                  }
+              }
 }
 
-}
+
+
+
 
 
         
    
         
     
-    
-
-
-   
-        
-    
-    
-
