@@ -1,6 +1,8 @@
-
-
-
+//código equipo BOCAPE 
+//integrantes: Brenda Ortiz Martinez
+//Wendy Bonilla Martinez 
+//Leonardo José Rodriguez Campos
+//Gabriel Ulises Peña
 package proyecto_lenguaje_2;
 import java.util.*;
 import java.io.*;
@@ -30,12 +32,12 @@ public class Proyecto_lenguaje_2 {
         } catch (IOException ex) {
             Logger.getLogger(Proyecto_lenguaje_2.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("\n");
+        
        System.out.println("Elementos no terminales:");
         System.out.println(no_terminales.toString());
 
         System.out.println("Elementos terminales:"); 
-        System.out.println(terminales.toString());
+        System.out.println(terminales.toString());System.out.println("\n");
         for(int a=0;a<producciones.size();a++){
             String cadena=producciones.get(a).toString();
             String[] Array1=cadena.split(":");
@@ -45,6 +47,7 @@ public class Proyecto_lenguaje_2 {
         Eliminar_muertos(producciones,no_terminales,terminales,sin_puntos_muertos,reglas_originales);
       
         System.out.println("SIN PUNTOS MUERTOS:"+sin_puntos_muertos);
+        System.out.println("\n");
         
         Eliminar_inaccesibles(sin_puntos_muertos,reglas_originales);
         
@@ -198,6 +201,7 @@ public class Proyecto_lenguaje_2 {
                                                       }
          
       System.out.println("REGLAS_SIN_INACCESIBLES:"+sin_puntos_muertos);
+        System.out.println("\n");
          Eliminacion_cadenas_vacias(sin_puntos_muertos);
     }
     
@@ -256,8 +260,9 @@ public class Proyecto_lenguaje_2 {
            }
     } 
          
-        System.out.println("SIN PUNTOS MUERTOS:"+sin_puntos_muertos);
-      System.out.println("cadena_vacia:"+Cadena_sin_repeticiones);
+        System.out.println("NUEVA_LISTA(antes de eliminar cadenas vacias):"+sin_puntos_muertos);
+        System.out.println("\n");
+      //System.out.println("cadena_vacia:"+Cadena_sin_repeticiones);
      
             Combinaciones(sin_puntos_muertos,Cadena_sin_repeticiones);
         
@@ -288,27 +293,76 @@ public static void Combinaciones(ArrayList sin_puntos_muertos,Set Cadena_sin_rep
                                            cadena4=Array2[a];
                                             //auxiliar.add(sin_puntos_muertos.get(0));
                                        if(cadena4.contains(Cadena_vacios.get(d).toString()) && c!=0){
-                                                System.out.println("CONTENGO VACIOS");
-                                                System.out.println("regla:"+cadena2);
-                                                System.out.println("produccion:"+cadena4);
+//                                                System.out.println("CONTENGO VACIOS");
+//                                                System.out.println("regla:"+cadena2);
+//                                                System.out.println("produccion:"+cadena4);
                                                // System.out.println("replace:"+(cadena4.replace(Cadena_vacios.get(d).toString(), "@")));//reemplaza todos los NT contenidos en la gramatica que generen cadena vacia @
                                                 
-                                                replace=cadena4.replace(Cadena_vacios.get(d).toString(), "@");
-                                                System.out.println("replace:"+replace);
+                                                replace=cadena4.replace(Cadena_vacios.get(d).toString(), "");
+//                                                System.out.println("replace:"+replace);
                                                cadena3=cadena3+replace+"/";
                                                
                                               // auxiliar.set(c,cadena3);
                                             } 
+                                       if(cadena3.contains("@") && c!=0){
+                                            
+                                           cadena3=cadena3.replace("@/", "");
+                                           
+                                       }
                                     }
                                        
                                
-                              
-                  }System.out.println("cadena3:"+cadena3);
+                                    }      
+//                  }System.out.println("cadena3:"+cadena3);
                   auxiliar.add(cadena2+":"+cadena3);
-                    System.out.println("auxiliar---"+auxiliar);
+                    
                   
-                  }
+                  }System.out.println("SIN CADENAS VACIAS:"+auxiliar);
+                  System.out.println("\n");
+                  Eliminacion_unitarios(auxiliar);
               }
+
+public static void Eliminacion_unitarios(ArrayList auxiliar){
+    String cadena=new String();
+    ArrayList unitarios=new ArrayList();
+    for(int a=0;a<auxiliar.size();a++){
+                                        cadena=auxiliar.get(a).toString();
+                                        String[] Array1=cadena.split(":");
+                                        String cadena3=Array1[1]; 
+                                        String cadena2=Array1[0];
+                                        String[] Array2=cadena3.split("/");
+                                        String cadena4=new String(); 
+    
+                                        
+                                       for(int b=0; b<Array2.length;b++){
+                                       cadena4=Array2[b];
+                                        if(cadena4.length()==1){
+                                            for(int c=0; c<cadena4.length();c++){
+                                                if(cadena4.charAt(c)>=65 && cadena4.charAt(c)<=90){ //verificar si el caracter es NT
+                                                  
+                                            unitarios.add(cadena2+":"+cadena2+"/"+cadena4.charAt(c));
+                                                    
+                                                    
+                                                    if(auxiliar.get(a).toString().contains(cadena4)){
+//                                                        System.out.println("cadena3::"+cadena3);
+//                                                        System.out.println("cadena2::"+cadena2);
+//                                                        System.out.println("cadena4::"+cadena4);
+//                                                        
+                                                        cadena3=cadena3.replace(cadena4, "");
+//                                                        if(cadena4.toString().charAt(c)==auxiliar.get(a).toString().charAt(0)){
+//                                                        
+//                                                        cadena3=cadena3+
+//                                                        }
+//                                                        System.out.println("nueva cadena:"+cadena3);
+                                                    }
+                                        }}}
+                                       
+                                       }                 
+    }
+                                                System.out.println("simbolos unitarios:"+unitarios);
+             
+}
+
 }
 
 
@@ -320,3 +374,5 @@ public static void Combinaciones(ArrayList sin_puntos_muertos,Set Cadena_sin_rep
    
         
     
+    
+
