@@ -248,81 +248,52 @@ public class Proyecto_lenguaje_2 {
                    String cadena=sin_puntos_muertos.get(c).toString();
                     String[] Array1=cadena.split(":");
                     String cadena3=Array1[1]; 
+                    String cadena2=Array1[0];
                     //System.out.println("prueba2:"+sin_puntos_muertos.get(c));
                if(cadena3.contains(Cadena_vacia.get(b).toString())){
-                   
-                    System.out.println("PRUEBA------------"+sin_puntos_muertos.get(c));
+                   Cadena_sin_repeticiones.add(cadena2);
+                    //System.out.println("PRUEBA------------"+Cadena_sin);
                }
-                
            }
            }
-           
     } 
+         System.out.println("cadena_vacia:"+Cadena_sin_repeticiones);
+        
       
-         System.out.println("cadena_vacia:"+Cadena_vacia);
-        
-        
-        
-        
-//        for(int b=0; b<Cadena_vacia.size();b++){
-//        for(int a=0; a<sin_puntos_muertos.size();a++){
-//                    if(sin_puntos_muertos.get(a).toString().contains(Cadena_vacia.get(b).toString())){
-//                        System.out.println("tambien produzco vacio:"+sin_puntos_muertos.get(a).toString().charAt(0));
-//                        String cadena=new String();
-//                        Cadena_vacia.add(sin_puntos_muertos.get(a).toString());
-//                 //     System.out.println("cadenaaa:"+Cadena_vacia);
-//                         
-//                    }
-//        }
-//      
-//        }
-       // System.out.println("nueva_cadena_vacia:"+Cadena_vacia);
-       Cadena_vacia.add(nuevas_cadenas_vacias);
-       
-        System.out.println("prueba hash---"+nuevas_cadenas_vacias);
-     //   Cadena_vacia.add(sin_puntos_muertos.get(a).toString().charAt(0));
-     Cadena_sin_repeticiones.add(nuevas_cadenas_vacias);
-     for(int a=0; a<nuevas_cadenas_vacias.length();a++){
-         
      
-     }
-        System.out.println("cadena_sin...."+Cadena_sin_repeticiones);
-            Combinaciones(sin_puntos_muertos,nuevas_cadenas_vacias);
+            Combinaciones(sin_puntos_muertos,Cadena_sin_repeticiones);
         
         
         
 }
 
-public static void Combinaciones(ArrayList sin_puntos_muertos,String Cadena_vacia){
-        System.out.println("combinaciones:"+sin_puntos_muertos);
-        System.out.println("combinaciones:"+Cadena_vacia);
+public static void Combinaciones(ArrayList sin_puntos_muertos,Set Cadena_sin_repeticiones){
+
        ArrayList auxiliar=new ArrayList();
         for(int a=0; a<sin_puntos_muertos.size();a++){
             String cadena=sin_puntos_muertos.get(a).toString();
             String[] Array1=cadena.split(":");
             String cadena3=Array1[1]; 
-            auxiliar.add(cadena3);  
+            String cadena2=Array1[0];
+            
         }  
         
        for(int a=0;a<sin_puntos_muertos.size();a++){
-           
-           if(sin_puntos_muertos.get(a).toString().contains(Cadena_vacia)){
-                
-           }
-           
+            
+          
        }
 }
-
-
-
-
-
-
 
 }
 
 
         
+   
+        
+    
+    
+
+
    
         
     
